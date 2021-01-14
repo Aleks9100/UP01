@@ -1,0 +1,384 @@
+﻿<Window x:Class="UP01.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UP01"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="0, 0, 0, 0.8"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0, 3, 0, 1"/>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+        </Style>
+        <Style TargetType="TabItem">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0, 0.5" EndPoint="1, 0.5" >
+                        <GradientStop Color="Gray" Offset="1.0"/>
+                        <GradientStop Color="White" Offset="0.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Green"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Red"/>
+        </Style>
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Red"/>
+        </Style>
+        <Style TargetType="DataGridRow">
+            <Setter Property="BorderBrush" Value="Red"/>
+            <Setter Property="BorderThickness" Value="0,0,0,0.8"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <TabControl TabStripPlacement="Left" HorizontalAlignment="Center" Height="399" VerticalAlignment="Top" Width="770" Margin="10,10,10,0">
+            <TabItem Header="Пользователи">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="DGR_User" Grid.Column="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Логин"  Binding="{Binding Path=Login}"/>
+                            <DataGridTextColumn Header="Пароль"  Binding="{Binding Path=Password}"/>
+                            <DataGridTextColumn Header="Статус"  Binding="{Binding Path=Status}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DockPanel Grid.Column="1">
+                        <ScrollViewer DockPanel.Dock="Top">
+                            <StackPanel>
+                                <TextBlock Text="Логин"/>
+                                <TextBox x:Name="TB_Login"/>
+                                <TextBlock Text="Пароль"/>
+                                <TextBox x:Name="TB_Password"/>
+                                <TextBlock Text="Статус"/>
+                                <TextBox x:Name="TB_Status"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <StackPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
+                            <Button Content="Добавить" Click="Button_Click" />
+                            <Button Content="Изменить запись"/>
+                            <Button Content="Удалить запись" />
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Должность">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="DGR_Position" Grid.Column="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название"  Binding="{Binding Path=Title}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DockPanel Grid.Column="1">
+                        <ScrollViewer DockPanel.Dock="Top">
+                            <StackPanel>
+                                <TextBlock Text="Название"/>
+                                <TextBox x:Name="TB_TitleP"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <StackPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
+                            <Button Content="Добавить"/>
+                            <Button Content="Изменить запись" />
+                            <Button Content="Удалить запись"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Сотрудник">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="DGR_Employee" Grid.Column="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Фамилия"  Binding="{Binding Path=FirstName}"/>
+                            <DataGridTextColumn Header="Имя"  Binding="{Binding Path=LastName}"/>
+                            <DataGridTextColumn Header="Отчество"  Binding="{Binding Path=MidleName}"/>
+                            <DataGridTextColumn Header="Телефон"  Binding="{Binding Path=Phone}"/>
+                            <DataGridTextColumn Header="Серия"  Binding="{Binding Path=Series}"/>
+                            <DataGridTextColumn Header="Номер"  Binding="{Binding Path=Number}"/>
+                            <DataGridTextColumn Header="Должность"  Binding="{Binding Path=Position.Title}"/>
+                            <DataGridTextColumn Header="Логин"  Binding="{Binding Path=User.Login}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DockPanel Grid.Column="1">
+                        <ScrollViewer DockPanel.Dock="Top">
+                            <StackPanel>
+                                <TextBlock Text="Фамилия"/>
+                                <TextBox x:Name="TB_LastNameE"/>
+                                <TextBlock Text="Имя"/>
+                                <TextBox x:Name="TB_FirstNameE"/>
+                                <TextBlock Text="Отчество"/>
+                                <TextBox x:Name="TB_MidleNameE"/>
+                                <TextBlock Text="Должность"/>
+                                <ComboBox x:Name="CB_Position" DisplayMemberPath="Title"/>
+                                <TextBlock Text="Логин"/>
+                                <ComboBox x:Name="CB_Firma" DisplayMemberPath="Login"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <StackPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
+                            <Button Content="Добавить" />
+                            <Button Content="Изменить запись"/>
+                            <Button Content="Удалить запись"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Поставщик">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="DGR_Supplier" Grid.Column="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название"  Binding="{Binding Path=Title}"/>
+                            <DataGridTextColumn Header="Адрес"  Binding="{Binding Path=Address}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DockPanel Grid.Column="1">
+                        <ScrollViewer DockPanel.Dock="Top">
+                            <StackPanel>
+                                <TextBlock Text="Название"/>
+                                <TextBox x:Name="TB_TitleS"/>
+                                <TextBlock Text="Адрес"/>
+                                <TextBox x:Name="TB_AddressS"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <StackPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
+                            <Button Content="Добавить" />
+                            <Button Content="Изменить запись" />
+                            <Button Content="Удалить запись"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Предмет">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="DGR_Item" Grid.Column="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название"  Binding="{Binding Path=Title}"/>
+                            <DataGridTextColumn Header="Цена"  Binding="{Binding Path=Price}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DockPanel Grid.Column="1">
+                        <ScrollViewer DockPanel.Dock="Top">
+                            <StackPanel>
+                                <TextBlock Text="Название"/>
+                                <TextBox x:Name="TB_TitleI"/>
+                                <TextBlock Text="Цена"/>
+                                <TextBox x:Name="TB_PriceI"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <StackPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
+                            <Button Content="Добавить"/>
+                            <Button Content="Изменить запись"/>
+                            <Button Content="Удалить запись"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Категория">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="DGR_Category" Grid.Column="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название"  Binding="{Binding Path=Title}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DockPanel Grid.Column="1">
+                        <ScrollViewer DockPanel.Dock="Top">
+                            <StackPanel>
+                                <TextBlock Text="Название"/>
+                                <TextBox x:Name="TB_TitleC"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <StackPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
+                            <Button Content="Добавить"/>
+                            <Button Content="Изменить запись"/>
+                            <Button Content="Удалить запись" />
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Покупатель">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="DGR_Buyer" Grid.Column="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Фамилия"  Binding="{Binding Path=LastName}"/>
+                            <DataGridTextColumn Header="Адрес"  Binding="{Binding Path=Address}"/>
+                            <DataGridTextColumn Header="Категория"  Binding="{Binding Path=Category.Title}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DockPanel Grid.Column="1">
+                        <ScrollViewer DockPanel.Dock="Top">
+                            <StackPanel>
+                                <TextBlock Text="Фамилия"/>
+                                <TextBox x:Name="TB_LastNameB"/>
+                                <TextBlock Text="Адрес"/>
+                                <TextBox x:Name="TB_AddressB"/>
+                                <TextBlock Text="Категория"/>
+                                <ComboBox x:Name="CB_Category" DisplayMemberPath="Title"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <StackPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
+                            <Button Content="Добавить" />
+                            <Button Content="Изменить запись"/>
+                            <Button Content="Удалить запись"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Поступление">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="DGR_Entrance" Grid.Column="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Поставщик"  Binding="{Binding Path=Supplier.Title}"/>
+                            <DataGridTextColumn Header="Фамилия сотрудника"  Binding="{Binding Path=Employee.LastName}"/>
+                            <DataGridTextColumn Header="Предмет" Binding="{Binding Path=Item.Title}"/>
+                            <DataGridTextColumn Header="Количество" Binding="{Binding Path=Quantity}"/>
+                            <DataGridTextColumn Header="Дата" Binding="{Binding Path=Date}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DockPanel Grid.Column="1">
+                        <ScrollViewer DockPanel.Dock="Top">
+                            <StackPanel>
+                                <TextBlock Text="Поставщик"/>
+                                <ComboBox x:Name="CB_SupplierE" DisplayMemberPath="Title"/>
+                                <TextBlock Text="Фамилия сотрудника" />
+                                <ComboBox x:Name="CB_LastNamewE" DisplayMemberPath="LastName"/>
+                                <TextBlock Text="Предмет"/>
+                                <ComboBox x:Name="CB_ItemE" DisplayMemberPath="Title"/>
+                                <TextBlock Text="Количество"/>
+                                <TextBox x:Name="TB_Quantity"/>
+                                <TextBlock Text="Дата"/>
+                                <DatePicker x:Name="DP_DateE"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <StackPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
+                            <Button Content="Добавить"/>
+                            <Button Content="Изменить запись" />
+                            <Button Content="Удалить запись"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Склад">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="DGR_Warehouse" Grid.Column="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Предмет" Binding="{Binding Path=Item.Title}"/>
+                            <DataGridTextColumn Header="Количество"  Binding="{Binding Path=Quantity}"/>
+                            <DataGridTextColumn Header="Адрес"  Binding="{Binding Path=Address}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DockPanel Grid.Column="1">
+                        <ScrollViewer DockPanel.Dock="Top">
+                            <StackPanel>
+                                <TextBlock Text="Предмет"/>
+                                <ComboBox x:Name="CB_ItemW" DisplayMemberPath="Title"/>
+                                <TextBlock Text="Количество"/>
+                                <TextBox x:Name="TB_QuantityW"/>
+                                <TextBlock Text="Адрес"/>
+                                <TextBox x:Name="TB_Way"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <StackPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
+                            <Button Content="Добавить"/>
+                            <Button Content="Изменить запись"/>
+                            <Button Content="Удалить запись"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Заказ">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="DGR_Ticket" Grid.Column="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Склад" Binding="{Binding Path=Warehouse.Address}"/>
+                            <DataGridTextColumn Header="Предмет"  Binding="{Binding Path=Item.Title}"/>
+                            <DataGridTextColumn Header="Покупатель"  Binding="{Binding Path=Buyer.LastName}"/>
+                            <DataGridTextColumn Header="Фамилия сотрудника" Binding="{Binding Path=Employee.LastName}"/>
+                            <DataGridTextColumn Header="Количество"  Binding="{Binding Path=Quantity}"/>
+                            <DataGridTextColumn Header="Дата"  Binding="{Binding Path=Date}"/>
+                            <DataGridTextColumn Header="Итог"  Binding="{Binding Path=Result}"/>
+                            <DataGridTextColumn Header="Статус"  Binding="{Binding Path=Status}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DockPanel Grid.Column="1">
+                        <ScrollViewer DockPanel.Dock="Top">
+                            <StackPanel>
+                                <TextBlock Text="Склад"/>
+                                <ComboBox x:Name="CB_Warehouse" DisplayMemberPath="Address"/>
+                                <TextBlock Text="Предмет"/>
+                                <ComboBox x:Name="CB_ItemT" DisplayMemberPath="Title"/>
+                                <TextBlock Text="Покупатель"/>
+                                <ComboBox x:Name="CB_BuyerT" DisplayMemberPath="LastName"/>
+                                <TextBlock Text="Фамилия сотрудника"/>
+                                <ComboBox x:Name="CB_EmployeeT" DisplayMemberPath="LastName"/>
+                                <TextBlock Text="Количество"/>
+                                <TextBox x:Name="TB_QuantityT"/>
+                                <TextBlock Text="Дата"/>
+                                <DatePicker x:Name="DP_DateT"/>
+                                <TextBlock Text="Итог"/>
+                                <TextBox x:Name="TB_Result"/>
+                                <TextBlock Text="Статус"/>
+                                <CheckBox x:Name="CB_Status"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <StackPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
+                            <Button Content="Добавить"/>
+                            <Button Content="Изменить запись"/>
+                            <Button Content="Удалить запись"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
