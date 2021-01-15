@@ -16,7 +16,7 @@ namespace UPTableDb
         public int? PositonID { get; set; }
         public int? UserID { get; set; }
         public virtual Position Position { get; set; }     
-        public virtual Users User { get; set; }
+        public virtual User User { get; set; }
         public virtual ICollection<Entrance> Entrance { get; set; }
         public virtual ICollection<Ticket> Ticket { get; set; }
 

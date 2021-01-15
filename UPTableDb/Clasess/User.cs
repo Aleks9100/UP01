@@ -4,7 +4,7 @@ using System.Text;
 
 namespace UPTableDb
 {
-    public class Users
+    public class User
     {
         public int UserID { get; set; }
         public string Login { get; set; }

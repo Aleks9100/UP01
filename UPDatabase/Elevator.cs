@@ -14,6 +14,15 @@ namespace UPDatabase
         public Elevator()
         {
 
+            if (Database.EnsureCreated()) 
+            {
+                Users.Add(new User
+                {
+                    Login = "Admin",
+                    Password = "123",
+                    Status = "Admin"
+                });
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,7 +37,7 @@ namespace UPDatabase
             modelBuilder.Entity<Employee>()
                         .HasOne(e => e.User)
                         .WithOne(e => e.Employee)
-                        .HasForeignKey<Users>(e => e.EmployeeID);
+                        .HasForeignKey<User>(e => e.UserID);
 
             modelBuilder.Entity<Buyer>()
                         .HasOne(b => b.Category)
@@ -85,7 +94,7 @@ namespace UPDatabase
             };
             optionsBuilder.UseNpgsql(builder.ToString());
         }
-        public DbSet<Users> Users { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Employee> Employees { get; set; }
@@ -94,5 +103,6 @@ namespace UPDatabase
         public DbSet<Position> Positions { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
     }
 }

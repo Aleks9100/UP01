@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UP01", "UP01\UP01.csproj", "{8D4DECF8-DE46-409C-9CF2-262E86D194DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UPDatabase", "UPDatabase\UPDatabase.csproj", "{63EF39F7-5C6F-4F0F-8915-C11760643995}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UPDatabase", "UPDatabase\UPDatabase.csproj", "{63EF39F7-5C6F-4F0F-8915-C11760643995}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UPTableDb", "UPTableDb\UPTableDb.csproj", "{E4E9603A-49BC-461E-A93D-F7708D3F3ED8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UPTableDb", "UPTableDb\UPTableDb.csproj", "{E4E9603A-49BC-461E-A93D-F7708D3F3ED8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
