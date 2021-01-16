@@ -71,11 +71,17 @@
                                 <TextBox x:Name="TB_Status"/>
                             </StackPanel>
                         </ScrollViewer>
+                        <StackPanel DockPanel.Dock="Bottom" Margin="0,0,0,110">
+                            <TextBlock Text="Поиск по ФИО"/>
+                            <TextBox x:Name="TB_Fullname"/>
+                            <Button Content="Поиск"/>
+                        </StackPanel>
                         <StackPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
                             <Button Content="Добавить"/>
                             <Button Content="Изменить запись"/>
                             <Button Content="Удалить запись" />
                         </StackPanel>
+                        
                     </DockPanel>
                 </Grid>
             </TabItem>

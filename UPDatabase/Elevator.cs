@@ -13,8 +13,8 @@ namespace UPDatabase
     {
         public Elevator()
         {
-
-            if (Database.EnsureCreated()) 
+            //Database.EnsureDeleted();
+            if (Database.EnsureCreated() || Users.Count() == 0) 
             {
                 Users.Add(new User
                 {
@@ -22,6 +22,7 @@ namespace UPDatabase
                     Password = "123",
                     Status = "Admin"
                 });
+                SaveChangesAsync();
             }
         }
 
@@ -78,6 +79,14 @@ namespace UPDatabase
                         .HasOne(b => b.Warehouse)
                         .WithMany(b => b.Ticket)
                         .HasForeignKey(b => b.WarehouseID);
+
+            modelBuilder.Entity<User>()
+                .HasData(new User()
+                {
+                    Login = "Admin",
+                    Password = "123",
+                    Status = "Admin"
+                });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

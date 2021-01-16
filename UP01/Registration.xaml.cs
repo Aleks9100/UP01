@@ -13,24 +13,23 @@ using System.Windows.Shapes;
 namespace UP01
 {
     /// <summary>
-    /// Логика взаимодействия для Authorization.xaml
+    /// Логика взаимодействия для Registration.xaml
     /// </summary>
-    public partial class Authorization : Window
+    public partial class Registration : Window
     {
-        public Authorization()
+        public Registration()
         {
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new MainWindow().Show();
-            this.Close();
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            new Registration().Show();
+            new Authorization().Show();
             this.Close();
         }
     }

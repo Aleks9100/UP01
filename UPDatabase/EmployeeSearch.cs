@@ -18,15 +18,18 @@ namespace UPDatabase
 
         public static IQueryable<Employee> GetManyEmployeeByMiddleName(this IQueryable<Employee> list, string middleName)
             => list.Where(c => c.MiddleName == middleName);
+
+        public static IQueryable<Employee> GetManyEmployeeByFullNameContains(this IQueryable<Employee> list, string text)
+            => list.Where(c => c.FullName.Contains(text));
         #endregion
 
         #region EmployeeExtensions
         public static Employee GetEmployeeByFirstName(this IQueryable<Employee> list, string firstName)
-           => list.Where(c => c.FirstName == firstName).SingleOrDefault();
+           => list.GetManyEmployeeByFirstName(firstName).SingleOrDefault();
         public static Employee GetEmployeeByLastName(this IQueryable<Employee> list, string lastName)
-            => list.Where(c => c.LastName == lastName).SingleOrDefault();
+            => list.GetManyEmployeeByLastName(lastName).SingleOrDefault();
         public static Employee GetEmployeeByMiddleName(this IQueryable<Employee> list, string middleName)
-            => list.Where(c => c.MiddleName == middleName).SingleOrDefault();
+            => list.GetManyEmployeeByMiddleName(middleName).SingleOrDefault();
         #endregion
     }
 }
