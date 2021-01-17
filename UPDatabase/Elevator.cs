@@ -16,13 +16,31 @@ namespace UPDatabase
             //Database.EnsureDeleted();
             if (Database.EnsureCreated() || Users.Count() == 0) 
             {
+                Positions.Add(new Position
+                {
+                    PositionID = 1,
+                    Title = "Admin"
+                });
                 Users.Add(new User
                 {
+                    UserID=1,
                     Login = "Admin",
                     Password = "123",
-                    Status = "Admin"
+                    Status = "Admin",
+                    EmployeeID=1
                 });
-                SaveChangesAsync();
+                Employees.Add(new Employee
+                {
+                    EmployeeID = 1,
+                    FirstName = "Ivan",
+                    LastName = "Ivanov",
+                    MiddleName = "Ivanovich",
+                    Phone = "213",
+                    Series = "123",
+                    Number = "131",
+                    PositonID=1
+                });
+                SaveChanges();
             }
         }
 
@@ -103,6 +121,96 @@ namespace UPDatabase
             };
             optionsBuilder.UseNpgsql(builder.ToString());
         }
+
+        #region AddInTables
+        public string TryAddUser(string login,string password,string status,int idEmployee) 
+        {
+            try
+            {
+                int id = 0;
+                foreach (var Id in Users.ToList()) { id = Id.UserID; }
+                Users.Add(new User
+                {
+                    UserID = id+1,
+                    Login = login,
+                    Password = password,
+                    Status = status,
+                    EmployeeID = idEmployee
+                });
+                SaveChanges();
+                return "Запись добавлена";
+            }
+            catch (Exception ex) { return ex.Message; }
+
+        }
+        public string TryAddEmployee(string firstName, string lastName, string middleName, string phone, string series, string number,int idUser,int idPosition )
+        {
+            try
+            {
+                int id = 0;
+                foreach (var Id in Employees.ToList()) { id = Id.EmployeeID; }
+                Employees.Add(new Employee
+                {
+                    EmployeeID=id+1,
+                    FirstName=firstName,
+                    LastName=lastName,
+                    MiddleName=middleName,
+                    Phone=phone,
+                    Series=series,
+                    Number=number,
+                    UserID=idUser,
+                    PositonID=idPosition
+                });
+                SaveChanges();
+                return "Запись добавлена";
+            }
+            catch (Exception ex) { return ex.Message; }
+
+        }
+        #endregion
+
+        #region EditInTables
+        public string TryEditUser(int idUser, string login, string password, string status, int idEmployee) 
+        {
+            try 
+            {
+                var item = Users.FirstOrDefault(i=>i.UserID == idUser);
+                //foreach (var idEmp in Users.ToList()) 
+                //{
+                //    if (idEmp.EmployeeID == idEmployee) return "У такого сотрудника есть учетная запись";
+                //}
+                if (item != null)
+                {
+                    item.Login = login;
+                    item.Password = password;
+                    item.Status = status;
+                    item.EmployeeID = idEmployee;
+                    SaveChanges();
+                    return "Запись успешно обновлена";
+                }
+                else return "Данный пользователь не найден";
+            }
+            catch(Exception ex) { return ex.Message; }
+        }
+        #endregion
+
+        #region RemoveInTables
+        public string TryRemoveUser(int idUser) 
+        {
+            try
+            {
+                var item = Users.SingleOrDefault(i => i.UserID == idUser);
+                if (item != null)
+                {
+                    Users.Remove(item);
+                    return "Запись успешно удалена";
+                }
+                else return "Данный пользователь не найден";
+            }
+            catch (Exception ex) { return ex.Message; }
+        }
+        #endregion
+
         public DbSet<User> Users { get; set; }
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<Category> Categories { get; set; }

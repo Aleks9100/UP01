@@ -24,11 +24,49 @@ namespace UP01
         public MainWindow()
         {
             InitializeComponent();
-            Cleaner();
-            Update();
+
+            CleanerDataGrid();
+            CleanerComboBox();
+            UpdateDataGrid();
+            UpdateComboBox();
         }
 
-        public void Cleaner()
+        private void CleanerComboBox()
+        {
+            CB_BuyerT.ItemsSource = null;
+            CB_Category.ItemsSource = null;
+            CB_EmployeeT.ItemsSource = null;
+            CB_ItemE.ItemsSource = null;
+            CB_ItemT.ItemsSource = null;
+            CB_ItemW.ItemsSource = null;
+            CB_LastNameEmployee.ItemsSource = null;
+            CB_LastNamewE.ItemsSource = null;
+            CB_Login.ItemsSource = null;
+            CB_Position.ItemsSource = null;
+            CB_SupplierE.ItemsSource = null;
+            CB_Warehouse.ItemsSource = null;
+        }
+
+        private void UpdateComboBox()
+        {
+            using (var Db = new Elevator())
+            {
+                CB_BuyerT.ItemsSource = Db.Buyers.ToList();
+                CB_Category.ItemsSource = Db.Categories.ToList();
+                CB_EmployeeT.ItemsSource = Db.Employees.ToList();
+                CB_ItemE.ItemsSource = Db.Items.ToList();
+                CB_ItemT.ItemsSource = Db.Items.ToList();
+                CB_ItemW.ItemsSource = Db.Items.ToList();
+                CB_LastNameEmployee.ItemsSource = Db.Employees.ToList();
+                CB_LastNamewE.ItemsSource = Db.Entrances.ToList();
+                CB_Login.ItemsSource = Db.Users.ToList();
+                CB_Position.ItemsSource = Db.Positions.ToList();
+                CB_SupplierE.ItemsSource = Db.Suppliers.ToList();
+                CB_Warehouse.ItemsSource = Db.Warehouses.ToList();
+            }
+        }
+
+        public void CleanerDataGrid()
         {
             DGR_Buyer.ItemsSource = null;
             DGR_Category.ItemsSource = null;
@@ -42,7 +80,7 @@ namespace UP01
             DGR_Warehouse.ItemsSource = null;
         }
 
-        public void Update()
+        public void UpdateDataGrid()
         {
             using (var Db = new Elevator()) 
             {
@@ -57,6 +95,23 @@ namespace UP01
                 DGR_User.ItemsSource = Db.Users.ToList();
                 DGR_Warehouse.ItemsSource = Db.Warehouses.ToList();
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            using (var Db = new Elevator())
+            {
+                MessageBox.Show(Db.TryAddUser(TB_Login.Text,TB_Password.Text,TB_Status.Text,Convert.ToInt32(CB_LastNameEmployee.SelectedValue)));
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

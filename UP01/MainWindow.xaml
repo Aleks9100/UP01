@@ -61,7 +61,12 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <DockPanel Grid.Column="1">
-                        <ScrollViewer DockPanel.Dock="Top">
+                        <StackPanel DockPanel.Dock="Top">
+                            <TextBlock FontSize="11" Text="Поиск по логину или статусу"/>
+                            <TextBox x:Name="TB_Fullname"/>
+                            <Button Content="Поиск"/>
+                        </StackPanel>
+                        <ScrollViewer DockPanel.Dock="Top" Margin="0,25,0,0">
                             <StackPanel>
                                 <TextBlock Text="Логин"/>
                                 <TextBox x:Name="TB_Login"/>
@@ -69,17 +74,15 @@
                                 <TextBox x:Name="TB_Password"/>
                                 <TextBlock Text="Статус"/>
                                 <TextBox x:Name="TB_Status"/>
+                                <TextBlock Text="Сотрудник"/>
+                                <ComboBox x:Name="CB_LastNameEmployee" DisplayMemberPath="LastName" SelectedValuePath="EmployeeID"/>
                             </StackPanel>
                         </ScrollViewer>
-                        <StackPanel DockPanel.Dock="Bottom" Margin="0,0,0,110">
-                            <TextBlock Text="Поиск по ФИО"/>
-                            <TextBox x:Name="TB_Fullname"/>
-                            <Button Content="Поиск"/>
-                        </StackPanel>
-                        <StackPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
-                            <Button Content="Добавить"/>
-                            <Button Content="Изменить запись"/>
-                            <Button Content="Удалить запись" />
+     
+                        <StackPanel DockPanel.Dock="Top" Margin="0,5,0,0">
+                            <Button Content="Добавить" Click="Button_Click"/>
+                            <Button Content="Изменить запись" Click="Button_Click_1"/>
+                            <Button Content="Удалить запись" Click="Button_Click_2" />
                         </StackPanel>
                         
                     </DockPanel>
@@ -139,9 +142,9 @@
                                 <TextBlock Text="Отчество"/>
                                 <TextBox x:Name="TB_MidleNameE"/>
                                 <TextBlock Text="Должность"/>
-                                <ComboBox x:Name="CB_Position" DisplayMemberPath="Title"/>
+                                <ComboBox x:Name="CB_Position" DisplayMemberPath="Title" SelectedValuePath="PositionID"/>
                                 <TextBlock Text="Логин"/>
-                                <ComboBox x:Name="CB_Firma" DisplayMemberPath="Login"/>
+                                <ComboBox x:Name="CB_Login" DisplayMemberPath="Login" SelectedValuePath="UserID"/>
                             </StackPanel>
                         </ScrollViewer>
                         <StackPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
@@ -257,7 +260,7 @@
                                 <TextBlock Text="Адрес"/>
                                 <TextBox x:Name="TB_AddressB"/>
                                 <TextBlock Text="Категория"/>
-                                <ComboBox x:Name="CB_Category" DisplayMemberPath="Title"/>
+                                <ComboBox x:Name="CB_Category" DisplayMemberPath="Title" SelectedValuePath="CategoryID"/>
                             </StackPanel>
                         </ScrollViewer>
                         <StackPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
@@ -287,11 +290,11 @@
                         <ScrollViewer DockPanel.Dock="Top">
                             <StackPanel>
                                 <TextBlock Text="Поставщик"/>
-                                <ComboBox x:Name="CB_SupplierE" DisplayMemberPath="Title"/>
+                                <ComboBox x:Name="CB_SupplierE" DisplayMemberPath="Title" SelectedValuePath="SupplierID"/>
                                 <TextBlock Text="Фамилия сотрудника" />
-                                <ComboBox x:Name="CB_LastNamewE" DisplayMemberPath="LastName"/>
+                                <ComboBox x:Name="CB_LastNamewE" DisplayMemberPath="LastName" SelectedValuePath="EmployeeID"/>
                                 <TextBlock Text="Предмет"/>
-                                <ComboBox x:Name="CB_ItemE" DisplayMemberPath="Title"/>
+                                <ComboBox x:Name="CB_ItemE" DisplayMemberPath="Title" SelectedValuePath="ItemID"/>
                                 <TextBlock Text="Количество"/>
                                 <TextBox x:Name="TB_Quantity"/>
                                 <TextBlock Text="Дата"/>
@@ -323,7 +326,7 @@
                         <ScrollViewer DockPanel.Dock="Top">
                             <StackPanel>
                                 <TextBlock Text="Предмет"/>
-                                <ComboBox x:Name="CB_ItemW" DisplayMemberPath="Title"/>
+                                <ComboBox x:Name="CB_ItemW" DisplayMemberPath="Title" SelectedValuePath="ItemID"/>
                                 <TextBlock Text="Количество"/>
                                 <TextBox x:Name="TB_QuantityW"/>
                                 <TextBlock Text="Адрес"/>
@@ -360,13 +363,13 @@
                         <ScrollViewer DockPanel.Dock="Top">
                             <StackPanel>
                                 <TextBlock Text="Склад"/>
-                                <ComboBox x:Name="CB_Warehouse" DisplayMemberPath="Address"/>
+                                <ComboBox x:Name="CB_Warehouse" DisplayMemberPath="Address" SelectedValuePath="WarehouseID"/>
                                 <TextBlock Text="Предмет"/>
-                                <ComboBox x:Name="CB_ItemT" DisplayMemberPath="Title"/>
+                                <ComboBox x:Name="CB_ItemT" DisplayMemberPath="Title" SelectedValuePath="ItemID"/>
                                 <TextBlock Text="Покупатель"/>
-                                <ComboBox x:Name="CB_BuyerT" DisplayMemberPath="LastName"/>
+                                <ComboBox x:Name="CB_BuyerT" DisplayMemberPath="LastName" SelectedValuePath="BuyerID"/>
                                 <TextBlock Text="Фамилия сотрудника"/>
-                                <ComboBox x:Name="CB_EmployeeT" DisplayMemberPath="LastName"/>
+                                <ComboBox x:Name="CB_EmployeeT" DisplayMemberPath="LastName" SelectedValuePath="EmployeeID"/>
                                 <TextBlock Text="Количество"/>
                                 <TextBox x:Name="TB_QuantityT"/>
                                 <TextBlock Text="Дата"/>
