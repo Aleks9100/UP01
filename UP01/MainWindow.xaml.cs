@@ -39,7 +39,6 @@ namespace UP01
             CB_ItemE.ItemsSource = null;
             CB_ItemT.ItemsSource = null;
             CB_ItemW.ItemsSource = null;
-            CB_LastNameEmployee.ItemsSource = null;
             CB_LastNamewE.ItemsSource = null;
             CB_Login.ItemsSource = null;
             CB_Position.ItemsSource = null;
@@ -57,7 +56,6 @@ namespace UP01
                 CB_ItemE.ItemsSource = Db.Items.ToList();
                 CB_ItemT.ItemsSource = Db.Items.ToList();
                 CB_ItemW.ItemsSource = Db.Items.ToList();
-                CB_LastNameEmployee.ItemsSource = Db.Employees.ToList();
                 CB_LastNamewE.ItemsSource = Db.Entrances.ToList();
                 CB_Login.ItemsSource = Db.Users.ToList();
                 CB_Position.ItemsSource = Db.Positions.ToList();
@@ -101,17 +99,53 @@ namespace UP01
         {
             using (var Db = new Elevator())
             {
-                MessageBox.Show(Db.TryAddUser(TB_Login.Text,TB_Password.Text,TB_Status.Text,Convert.ToInt32(CB_LastNameEmployee.SelectedValue)));
+                MessageBox.Show(Db.TryAddUser(TB_Login.Text,TB_Password.Text,TB_Status.Text));
+                CleanerDataGrid();
+                CleanerComboBox();
+                UpdateDataGrid();
+                UpdateComboBox();
             }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            using (var Db = new Elevator())
+            {
+                MessageBox.Show(Db.TryEditUser(Convert.ToInt32(DGR_User.SelectedValue),TB_Login.Text, TB_Password.Text, TB_Status.Text));
+                CleanerDataGrid();
+                CleanerComboBox();
+                UpdateDataGrid();
+                UpdateComboBox();
+            }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            using (var Db = new Elevator())
+            {
+                MessageBox.Show(Db.TryRemoveUser(Convert.ToInt32(DGR_User.SelectedValue)));
+                CleanerDataGrid();
+                CleanerComboBox();
+                UpdateDataGrid();
+                UpdateComboBox();
+            }
+        }
 
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            using (var Db = new Elevator())
+            {
+                DGR_User.ItemsSource = null;
+                DGR_User.ItemsSource = Db.Users.GetManyUserByLogin(TB_LoginStatus.Text).GetManyUserByStatus(TB_LoginStatus.Text).ToList();
+            }
+         }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            CleanerDataGrid();
+            CleanerComboBox();
+            UpdateDataGrid();
+            UpdateComboBox();
         }
     }
 }

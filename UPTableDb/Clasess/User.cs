@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UPTableDb
 {
@@ -10,7 +12,6 @@ namespace UPTableDb
         public string Login { get; set; }
         public string Password { get; set; }
         public string Status { get; set; }
-        public int? EmployeeID { get; set; }
         public virtual Employee Employee { get; set; }
     }
 }

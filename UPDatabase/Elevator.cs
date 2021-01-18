@@ -12,35 +12,10 @@ namespace UPDatabase
     public class Elevator:DbContext
     {
         public Elevator()
-        {
+        {          
             //Database.EnsureDeleted();
             if (Database.EnsureCreated() || Users.Count() == 0) 
-            {
-                Positions.Add(new Position
-                {
-                    PositionID = 1,
-                    Title = "Admin"
-                });
-                Users.Add(new User
-                {
-                    UserID=1,
-                    Login = "Admin",
-                    Password = "123",
-                    Status = "Admin",
-                    EmployeeID=1
-                });
-                Employees.Add(new Employee
-                {
-                    EmployeeID = 1,
-                    FirstName = "Ivan",
-                    LastName = "Ivanov",
-                    MiddleName = "Ivanovich",
-                    Phone = "213",
-                    Series = "123",
-                    Number = "131",
-                    PositonID=1
-                });
-                SaveChanges();
+            {             
             }
         }
 
@@ -56,7 +31,7 @@ namespace UPDatabase
             modelBuilder.Entity<Employee>()
                         .HasOne(e => e.User)
                         .WithOne(e => e.Employee)
-                        .HasForeignKey<User>(e => e.UserID);
+                        .HasForeignKey<Employee>(e => e.UserID);
 
             modelBuilder.Entity<Buyer>()
                         .HasOne(b => b.Category)
@@ -101,6 +76,7 @@ namespace UPDatabase
             modelBuilder.Entity<User>()
                 .HasData(new User()
                 {
+                    UserID=1,
                     Login = "Admin",
                     Password = "123",
                     Status = "Admin"
@@ -111,11 +87,11 @@ namespace UPDatabase
         {
             var builder = new NpgsqlConnectionStringBuilder()
             {
-                Host = "ec2-54-155-99-116.eu-west-1.compute.amazonaws.com",
+                Host = "ec2-79-125-77-37.eu-west-1.compute.amazonaws.com",
                 Port = 5432,
-                Username = "lnwtivvmztzara",
-                Password = "d8ac2b67127b668d75941ad1c889dc9bf0014e5a00a8d57af93572a236793eb9",
-                Database = "dfhu5shnod5tji",
+                Username = "hbfnznyihfasvp",
+                Password = "8b58bde7fde965f16ab81e562ced719a7b99fd6c53dce3e68585e679b2f9b064",
+                Database = "d12q7ldhf88mbv",
                 SslMode = SslMode.Require,
                 TrustServerCertificate = true
             };
@@ -123,7 +99,7 @@ namespace UPDatabase
         }
 
         #region AddInTables
-        public string TryAddUser(string login,string password,string status,int idEmployee) 
+        public string TryAddUser(string login,string password,string status) 
         {
             try
             {
@@ -134,8 +110,7 @@ namespace UPDatabase
                     UserID = id+1,
                     Login = login,
                     Password = password,
-                    Status = status,
-                    EmployeeID = idEmployee
+                    Status = status
                 });
                 SaveChanges();
                 return "Запись добавлена";
@@ -158,7 +133,6 @@ namespace UPDatabase
                     Phone=phone,
                     Series=series,
                     Number=number,
-                    UserID=idUser,
                     PositonID=idPosition
                 });
                 SaveChanges();
@@ -170,21 +144,16 @@ namespace UPDatabase
         #endregion
 
         #region EditInTables
-        public string TryEditUser(int idUser, string login, string password, string status, int idEmployee) 
+        public string TryEditUser(int idUser, string login, string password, string status) 
         {
             try 
             {
                 var item = Users.FirstOrDefault(i=>i.UserID == idUser);
-                //foreach (var idEmp in Users.ToList()) 
-                //{
-                //    if (idEmp.EmployeeID == idEmployee) return "У такого сотрудника есть учетная запись";
-                //}
                 if (item != null)
                 {
                     item.Login = login;
                     item.Password = password;
                     item.Status = status;
-                    item.EmployeeID = idEmployee;
                     SaveChanges();
                     return "Запись успешно обновлена";
                 }
@@ -203,6 +172,7 @@ namespace UPDatabase
                 if (item != null)
                 {
                     Users.Remove(item);
+                    SaveChanges();
                     return "Запись успешно удалена";
                 }
                 else return "Данный пользователь не найден";

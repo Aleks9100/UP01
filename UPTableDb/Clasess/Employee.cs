@@ -15,7 +15,7 @@ namespace UPTableDb
         public string Series { get; set; }
         public string Number { get; set; }
         public int? PositonID { get; set; }
-        public int? UserID { get; set; }
+        public int UserID { get; set; }
         public virtual Position Position { get; set; }     
         public virtual User User { get; set; }
         public virtual ICollection<Entrance> Entrance { get; set; }

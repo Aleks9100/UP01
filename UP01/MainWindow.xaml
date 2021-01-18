@@ -53,7 +53,7 @@
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="DGR_User" Grid.Column="0">
+                    <DataGrid x:Name="DGR_User" Grid.Column="0" SelectedValuePath="UserID">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Логин"  Binding="{Binding Path=Login}"/>
                             <DataGridTextColumn Header="Пароль"  Binding="{Binding Path=Password}"/>
@@ -63,8 +63,9 @@
                     <DockPanel Grid.Column="1">
                         <StackPanel DockPanel.Dock="Top">
                             <TextBlock FontSize="11" Text="Поиск по логину или статусу"/>
-                            <TextBox x:Name="TB_Fullname"/>
-                            <Button Content="Поиск"/>
+                            <TextBox x:Name="TB_LoginStatus"/>
+                            <Button Content="Поиск" Click="Button_Click_3"/>
+                            <Button Content="Отмена" Click="Button_Click_4"/>
                         </StackPanel>
                         <ScrollViewer DockPanel.Dock="Top" Margin="0,25,0,0">
                             <StackPanel>
@@ -75,7 +76,6 @@
                                 <TextBlock Text="Статус"/>
                                 <TextBox x:Name="TB_Status"/>
                                 <TextBlock Text="Сотрудник"/>
-                                <ComboBox x:Name="CB_LastNameEmployee" DisplayMemberPath="LastName" SelectedValuePath="EmployeeID"/>
                             </StackPanel>
                         </ScrollViewer>
      
@@ -94,7 +94,7 @@
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="DGR_Position" Grid.Column="0">
+                    <DataGrid x:Name="DGR_Position" Grid.Column="0" SelectedValuePath="PositionID">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Название"  Binding="{Binding Path=Title}"/>
                         </DataGrid.Columns>
@@ -120,16 +120,16 @@
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="DGR_Employee" Grid.Column="0">
+                    <DataGrid x:Name="DGR_Employee" Grid.Column="0" SelectedValuePath="EmployeeID">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Фамилия"  Binding="{Binding Path=FirstName}"/>
                             <DataGridTextColumn Header="Имя"  Binding="{Binding Path=LastName}"/>
-                            <DataGridTextColumn Header="Отчество"  Binding="{Binding Path=MidleName}"/>
+                            <DataGridTextColumn Header="Отчество"  Binding="{Binding Path=MiddleName}"/>
                             <DataGridTextColumn Header="Телефон"  Binding="{Binding Path=Phone}"/>
                             <DataGridTextColumn Header="Серия"  Binding="{Binding Path=Series}"/>
                             <DataGridTextColumn Header="Номер"  Binding="{Binding Path=Number}"/>
                             <DataGridTextColumn Header="Должность"  Binding="{Binding Path=Position.Title}"/>
-                            <DataGridTextColumn Header="Логин"  Binding="{Binding Path=User.Login}"/>
+                            <DataGridTextColumn Header="Статус"  Binding="{Binding Path=User.Status}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <DockPanel Grid.Column="1">
@@ -161,7 +161,7 @@
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="DGR_Supplier" Grid.Column="0">
+                    <DataGrid x:Name="DGR_Supplier" Grid.Column="0" SelectedValuePath="SupplierID">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Название"  Binding="{Binding Path=Title}"/>
                             <DataGridTextColumn Header="Адрес"  Binding="{Binding Path=Address}"/>
@@ -190,7 +190,7 @@
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="DGR_Item" Grid.Column="0">
+                    <DataGrid x:Name="DGR_Item" Grid.Column="0" SelectedValuePath="ItemID">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Название"  Binding="{Binding Path=Title}"/>
                             <DataGridTextColumn Header="Цена"  Binding="{Binding Path=Price}"/>
@@ -219,7 +219,7 @@
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="DGR_Category" Grid.Column="0">
+                    <DataGrid x:Name="DGR_Category" Grid.Column="0" SelectedValuePath="CategoryID">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Название"  Binding="{Binding Path=Title}"/>
                         </DataGrid.Columns>
@@ -245,7 +245,7 @@
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="DGR_Buyer" Grid.Column="0">
+                    <DataGrid x:Name="DGR_Buyer" Grid.Column="0" SelectedValuePath="BuyerID">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Фамилия"  Binding="{Binding Path=LastName}"/>
                             <DataGridTextColumn Header="Адрес"  Binding="{Binding Path=Address}"/>
@@ -277,7 +277,7 @@
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="DGR_Entrance" Grid.Column="0">
+                    <DataGrid x:Name="DGR_Entrance" Grid.Column="0" SelectedValuePath="EntranceID">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Поставщик"  Binding="{Binding Path=Supplier.Title}"/>
                             <DataGridTextColumn Header="Фамилия сотрудника"  Binding="{Binding Path=Employee.LastName}"/>
@@ -315,7 +315,7 @@
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="DGR_Warehouse" Grid.Column="0">
+                    <DataGrid x:Name="DGR_Warehouse" Grid.Column="0" SelectedValuePath="WarehouseID">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Предмет" Binding="{Binding Path=Item.Title}"/>
                             <DataGridTextColumn Header="Количество"  Binding="{Binding Path=Quantity}"/>
@@ -347,7 +347,7 @@
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="DGR_Ticket" Grid.Column="0">
+                    <DataGrid x:Name="DGR_Ticket" Grid.Column="0" SelectedValuePath="TicketID">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Склад" Binding="{Binding Path=Warehouse.Address}"/>
                             <DataGridTextColumn Header="Предмет"  Binding="{Binding Path=Item.Title}"/>
